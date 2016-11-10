@@ -20,9 +20,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-fN-mri">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.98277209050000003" green="0.98277209050000003" blue="0.98277209050000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="T7v-oO-ha5"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLe-TG-QZg">
+                                <rect key="frame" x="0.0" y="64" width="375" height="120"/>
+                                <color key="backgroundColor" red="0.78837685899999999" green="0.78972791379999996" blue="0.81034482760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="5Z7-EM-Gwd"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="kKE-Lk-mQ6">
+                                <rect key="frame" x="0.0" y="184" width="375" height="439"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.83040392399999996" green="0.83022689819999995" blue="0.83512252570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="AzQ-Q5-8dZ" detailTextLabel="Q7r-DD-T4O" style="IBUITableViewCellStyleValue1" id="z4Y-yx-peZ">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z4Y-yx-peZ" id="ISe-Uh-5Hz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AzQ-Q5-8dZ">
+                                                    <rect key="frame" x="15" y="12" width="32" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7r-DD-T4O">
+                                                    <rect key="frame" x="318" y="12" width="42" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eXI-fN-mri" firstAttribute="top" secondItem="kKE-Lk-mQ6" secondAttribute="bottom" id="5wN-Ea-zJj"/>
+                            <constraint firstItem="NLe-TG-QZg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7vS-Ny-gZJ"/>
+                            <constraint firstAttribute="trailing" secondItem="kKE-Lk-mQ6" secondAttribute="trailing" id="9C4-Ym-iGx"/>
+                            <constraint firstAttribute="trailing" secondItem="NLe-TG-QZg" secondAttribute="trailing" id="9I9-hd-708"/>
+                            <constraint firstItem="kKE-Lk-mQ6" firstAttribute="top" secondItem="NLe-TG-QZg" secondAttribute="bottom" id="Cgm-kp-vIe"/>
+                            <constraint firstItem="eXI-fN-mri" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Fp5-Yc-QC2"/>
+                            <constraint firstItem="NLe-TG-QZg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZG4-RH-YQP"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eXI-fN-mri" secondAttribute="bottom" id="aPd-Lu-qMC"/>
+                            <constraint firstItem="kKE-Lk-mQ6" firstAttribute="top" secondItem="NLe-TG-QZg" secondAttribute="bottom" id="ggF-NQ-Jyo"/>
+                            <constraint firstItem="kKE-Lk-mQ6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mHW-wS-GSo"/>
+                            <constraint firstAttribute="trailing" secondItem="eXI-fN-mri" secondAttribute="trailing" id="vGm-qA-wDN"/>
+                            <constraint firstItem="eXI-fN-mri" firstAttribute="top" secondItem="kKE-Lk-mQ6" secondAttribute="bottom" id="wjT-dk-ABY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pop Music" id="rgm-tN-eqf"/>
+                    <connections>
+                        <outlet property="dataTable" destination="kKE-Lk-mQ6" id="d66-Vw-dRR"/>
+                        <outlet property="toolbar" destination="eXI-fN-mri" id="crR-W1-nx6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
