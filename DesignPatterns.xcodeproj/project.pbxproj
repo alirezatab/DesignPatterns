@@ -15,6 +15,7 @@
 		C20161FA1DD5179C00C25BED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C20161F81DD5179C00C25BED /* LaunchScreen.storyboard */; };
 		C20162051DD5179C00C25BED /* DesignPatternsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162041DD5179C00C25BED /* DesignPatternsTests.swift */; };
 		C20162101DD5179C00C25BED /* DesignPatternsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201620F1DD5179C00C25BED /* DesignPatternsUITests.swift */; };
+		C201621F1DD51F8200C25BED /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C201621E1DD51F8200C25BED /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C201620B1DD5179C00C25BED /* DesignPatternsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesignPatternsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C201620F1DD5179C00C25BED /* DesignPatternsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPatternsUITests.swift; sourceTree = "<group>"; };
 		C20162111DD5179C00C25BED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C201621E1DD51F8200C25BED /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		C20161EB1DD5179C00C25BED /* DesignPatterns */ = {
 			isa = PBXGroup;
 			children = (
+				C201621D1DD51F7900C25BED /* API */,
 				C20161EC1DD5179C00C25BED /* AppDelegate.swift */,
 				C20161EE1DD5179C00C25BED /* ViewController.swift */,
 				C20161F01DD5179C00C25BED /* Main.storyboard */,
@@ -126,6 +129,14 @@
 				C20162111DD5179C00C25BED /* Info.plist */,
 			);
 			path = DesignPatternsUITests;
+			sourceTree = "<group>";
+		};
+		C201621D1DD51F7900C25BED /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C201621E1DD51F8200C25BED /* HTTPClient.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +276,7 @@
 			files = (
 				C20161EF1DD5179C00C25BED /* ViewController.swift in Sources */,
 				C20161F51DD5179C00C25BED /* DesignPatterns.xcdatamodeld in Sources */,
+				C201621F1DD51F8200C25BED /* HTTPClient.swift in Sources */,
 				C20161ED1DD5179C00C25BED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +522,7 @@
 				C20162161DD5179C00C25BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C20162171DD5179C00C25BED /* Build configuration list for PBXNativeTarget "DesignPatternsTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +531,7 @@
 				C20162191DD5179C00C25BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C201621A1DD5179C00C25BED /* Build configuration list for PBXNativeTarget "DesignPatternsUITests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +540,7 @@
 				C201621C1DD5179C00C25BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
