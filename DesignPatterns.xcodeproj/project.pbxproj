@@ -19,6 +19,7 @@
 		C20162211DD597B400C25BED /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162201DD597B400C25BED /* Album.swift */; };
 		C20162231DD59BCE00C25BED /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162221DD59BCE00C25BED /* AlbumView.swift */; };
 		C20162281DD5A46200C25BED /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162271DD5A46200C25BED /* LibraryAPI.swift */; };
+		C201622A1DD5A7AB00C25BED /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162291DD5A7AB00C25BED /* PersistencyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		C20162201DD597B400C25BED /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		C20162221DD59BCE00C25BED /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlbumView.swift; path = ../AlbumView.swift; sourceTree = "<group>"; };
 		C20162271DD5A46200C25BED /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
+		C20162291DD5A7AB00C25BED /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			children = (
 				C201621E1DD51F8200C25BED /* HTTPClient.swift */,
 				C20162271DD5A46200C25BED /* LibraryAPI.swift */,
+				C20162291DD5A7AB00C25BED /* PersistencyManager.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				C20161ED1DD5179C00C25BED /* AppDelegate.swift in Sources */,
 				C20162211DD597B400C25BED /* Album.swift in Sources */,
 				C20162281DD5A46200C25BED /* LibraryAPI.swift in Sources */,
+				C201622A1DD5A7AB00C25BED /* PersistencyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

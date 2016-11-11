@@ -12,16 +12,16 @@ class Album: NSObject {
 
     var title : String!
     var artist : String!
-    var genere : String!
+    var genre : String!
     var coverUrl : String!
     var year : String!
     
     ///This code creates an initializer for the Album class. When you create a new album, you’ll pass in the album name, the artist, the genre, the album cover URL, and the year.
-    init(title:String, artist:String, genere:String, coverUrl:String, year:String) {
+    init(title:String, artist:String, genre:String, coverUrl:String, year:String) {
         super.init()
         self.title = title
         self.artist = artist
-        self.genere = genere
+        self.genre = genre
         self.coverUrl = coverUrl
         self.year = year
     }
@@ -30,7 +30,7 @@ class Album: NSObject {
     override var description: String {
         return "title: \(title)" +
                "artist: \(artist)" +
-               "genere: \(genere)" +
+               "genere: \(genre)" +
                "coverUrl: \(coverUrl)" +
                "year: \(year)"
     }
