@@ -106,10 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				C201621D1DD51F7900C25BED /* API */,
+				C20162241DD5A27000C25BED /* Modal */,
+				C20162251DD5A27600C25BED /* View */,
+				C20162261DD5A28800C25BED /* Controller */,
 				C20161EC1DD5179C00C25BED /* AppDelegate.swift */,
-				C20162201DD597B400C25BED /* Album.swift */,
-				C20162221DD59BCE00C25BED /* AlbumView.swift */,
-				C20161EE1DD5179C00C25BED /* ViewController.swift */,
 				C20161F01DD5179C00C25BED /* Main.storyboard */,
 				C20161F61DD5179C00C25BED /* Assets.xcassets */,
 				C20161F81DD5179C00C25BED /* LaunchScreen.storyboard */,
@@ -143,6 +143,30 @@
 				C201621E1DD51F8200C25BED /* HTTPClient.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		C20162241DD5A27000C25BED /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				C20162201DD597B400C25BED /* Album.swift */,
+			);
+			name = Modal;
+			sourceTree = "<group>";
+		};
+		C20162251DD5A27600C25BED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C20162221DD59BCE00C25BED /* AlbumView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C20162261DD5A28800C25BED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C20161EE1DD5179C00C25BED /* ViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
