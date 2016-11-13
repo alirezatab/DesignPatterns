@@ -10,4 +10,9 @@
 
 import Foundation
 
-
+//Notice there’s a ae_ at the beginning of the method name, as an abbreviation of the name of the extension: AlbumExtension. Conventions like this will help prevent collisions with methods (including possible private methods you might not know about) in the original implementation.
+extension Album {
+    func ae_tableRepresentation() -> (titles:[String], values:[String]) {
+        return (["Artist", "Album", "Genre", "Year"], [artist, title, genre, year])
+    }
+}
