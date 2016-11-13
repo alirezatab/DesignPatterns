@@ -20,6 +20,7 @@
 		C20162231DD59BCE00C25BED /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162221DD59BCE00C25BED /* AlbumView.swift */; };
 		C20162281DD5A46200C25BED /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162271DD5A46200C25BED /* LibraryAPI.swift */; };
 		C201622A1DD5A7AB00C25BED /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162291DD5A7AB00C25BED /* PersistencyManager.swift */; };
+		C20F07091DD840F800973FED /* AlbumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F07081DD840F800973FED /* AlbumExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		C20162221DD59BCE00C25BED /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlbumView.swift; path = ../AlbumView.swift; sourceTree = "<group>"; };
 		C20162271DD5A46200C25BED /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 		C20162291DD5A7AB00C25BED /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
+		C20F07081DD840F800973FED /* AlbumExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				C20162201DD597B400C25BED /* Album.swift */,
+				C20F07081DD840F800973FED /* AlbumExtensions.swift */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			files = (
 				C20162231DD59BCE00C25BED /* AlbumView.swift in Sources */,
 				C20161EF1DD5179C00C25BED /* ViewController.swift in Sources */,
+				C20F07091DD840F800973FED /* AlbumExtensions.swift in Sources */,
 				C20161F51DD5179C00C25BED /* DesignPatterns.xcdatamodeld in Sources */,
 				C201621F1DD51F8200C25BED /* HTTPClient.swift in Sources */,
 				C20161ED1DD5179C00C25BED /* AppDelegate.swift in Sources */,
