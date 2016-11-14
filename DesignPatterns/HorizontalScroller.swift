@@ -52,12 +52,17 @@ class HorizontalScroller: UIView {
     func initializeScrollView() {
         //1
         //Create’s a new UIScrollView instance and add it to the parent view.
-        
+        scroller = UIScrollView()
+        addSubview(scroller)
+    
         //2
         //Turn off autoresizing masks. This is so you can apply your own constraints
+        ///below code has no setTranslateAutoresizingMaskIntoConstraints
+        ///scroller.setTranslateAutoresizingMaskIntoConstraints(false)
         
         //3
         //Apply constraints to the scrollview. You want the scroll view to completely fill the HorizontalScroller
+        
         
         //4
         //Create a tap gesture recognizer. The tap gesture recognizer detects touches on the scroll view and checks if an album cover has been tapped. If so, it will notify the HorizontalScroller delegate.
