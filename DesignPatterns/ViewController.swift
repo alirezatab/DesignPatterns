@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
     
     @IBOutlet weak var dataTable: UITableView!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -34,11 +34,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         dataTable.dataSource = self
         dataTable.backgroundView = nil
         view.addSubview(dataTable!)
+        
+        self.showDataForAlbum(albumIndex: currentAlbumIndex)
     }
     
     func showDataForAlbum(albumIndex: Int) {
         // defensive code: make sure the requested index is lower than the amount of albums
-        
+        if (albumIndex < allAlbums.count && albumIndex > -1) {
+            //fetch albums
+            let album = allAlbums[albumIndex]
+            //save the albums data to present it later in tableview
+            currentAlbumData = album.ae_tableRepresentation()
+        } else{
+            currentAlbumData = nil
+        }
+        // we have the data we need, let's refresh our tableview
+        dataTable!.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
