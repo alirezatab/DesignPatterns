@@ -21,6 +21,7 @@
 		C20162281DD5A46200C25BED /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162271DD5A46200C25BED /* LibraryAPI.swift */; };
 		C201622A1DD5A7AB00C25BED /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20162291DD5A7AB00C25BED /* PersistencyManager.swift */; };
 		C20F07091DD840F800973FED /* AlbumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F07081DD840F800973FED /* AlbumExtensions.swift */; };
+		C20F070B1DD99F0400973FED /* HorizontalScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F070A1DD99F0400973FED /* HorizontalScroller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		C20162271DD5A46200C25BED /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 		C20162291DD5A7AB00C25BED /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		C20F07081DD840F800973FED /* AlbumExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumExtensions.swift; sourceTree = "<group>"; };
+		C20F070A1DD99F0400973FED /* HorizontalScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalScroller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				C20162221DD59BCE00C25BED /* AlbumView.swift */,
+				C20F070A1DD99F0400973FED /* HorizontalScroller.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				C20162211DD597B400C25BED /* Album.swift in Sources */,
 				C20162281DD5A46200C25BED /* LibraryAPI.swift in Sources */,
 				C201622A1DD5A7AB00C25BED /* PersistencyManager.swift in Sources */,
+				C20F070B1DD99F0400973FED /* HorizontalScroller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
