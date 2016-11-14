@@ -13,8 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var dataTable: UITableView!
     @IBOutlet weak var toolbar: UIToolbar!
     
+    //private is only seen in ViewController and not any of the extension within the file
+    //fileprivate is private for other files but even etensions of this file can see it
     private var allAlbums = [Album]()
-    private var currentAlbumData : (titles:[String], values:[String])?
+    fileprivate var currentAlbumData : (titles:[String], values:[String])?
     private var currentAlbumIndex = 0
     
     override func viewDidLoad() {
@@ -60,3 +62,27 @@ class ViewController: UIViewController {
 
 }
 
+
+///You can actually add the methods to the main class declaration or to the extension; the compiler doesn’t care that the data source methods are actually inside the UITableViewDataSource extension. For humans reading the code though, this kind of organization really helps with readability.
+extension ViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let albumData = currentAlbumData {
+            return albumData.titles.count
+        } else{
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UITableViewCell
+        if let albumData = currentAlbumData {
+            cell.textLabel!.text = albumData.titles[indexPath.row]
+            cell.detailTextLabel!.text = albumData.values[indexPath.row]
+        }
+        return cell
+    }
+}
+
+extension ViewController : UITableViewDelegate {
+    
+}
