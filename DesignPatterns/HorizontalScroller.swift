@@ -62,9 +62,28 @@ class HorizontalScroller: UIView {
         
         //3
         //Apply constraints to the scrollview. You want the scroll view to completely fill the HorizontalScroller
-        
+        self.addConstraint(NSLayoutConstraint(item: scroller, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint(item: scroller, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint(item: scroller, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint(item: scroller, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0))
         
         //4
         //Create a tap gesture recognizer. The tap gesture recognizer detects touches on the scroll view and checks if an album cover has been tapped. If so, it will notify the HorizontalScroller delegate.
+        let tapRecognizer = UITapGestureRecognizer(target: self, action:#selector(HorizontalScroller.scrollerTapped(_:)))
+        scroller.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func scrollerTapped(_ gesture: UITapGestureRecognizer) {
+        let location = gesture.location(in: gesture.view)
+        if let delegate = delegate {
+            for index in 0..<delegate.numberOfViewsForHorizontalScroller(self) {
+                let view = scroller.subviews[index]
+                if view.frame.contains(location) {
+                    delegate.horizontalScrollerClickedViewAtIndex(self, index: index)
+                    scroller.setContentOffset(CGPoint(x: view.frame.origin.x - self.frame.size.width/2 + view.frame.size.width/2, y: 0), animated:true)
+                    break
+                }
+            }
+        }
     }
 }
