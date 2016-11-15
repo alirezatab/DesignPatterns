@@ -73,17 +73,28 @@ class HorizontalScroller: UIView {
         scroller.addGestureRecognizer(tapRecognizer)
     }
     
+    func viewAtIndex(index :Int) -> UIView {
+        return viewArray[index]
+    }
+    
     func scrollerTapped(_ gesture: UITapGestureRecognizer) {
+        // The gesture passed in as a parameter lets you extract the location with locationInView()
         let location = gesture.location(in: gesture.view)
         if let delegate = delegate {
             for index in 0..<delegate.numberOfViewsForHorizontalScroller(self) {
-                let view = scroller.subviews[index]
+                let view = scroller.subviews[index] as! UIView
                 if view.frame.contains(location) {
-                    delegate.horizontalScrollerClickedViewAtIndex(self, index: index)
-                    scroller.setContentOffset(CGPoint(x: view.frame.origin.x - self.frame.size.width/2 + view.frame.size.width/2, y: 0), animated:true)
-                    break
+                    // For each view in the scroll view, perform a hit test using CGRectContainsPoint to find the view that was tapped. When the view is found, call the delegate method horizontalScrollerClickedViewAtIndex. Before you break out of the for loop, center the tapped view in the scroll view
+                    if CGRectContainsPoint(view.frame, location) {
+                        delegate.horizontalScrollerClickedViewAtIndex(self, index: index)
+                        scroller.setContentOffset(CGPoint(x: view.frame.origin.x - self.frame.size.width/2 + view.frame.size.width/2, y: 0), animated:true)
+                        break
+                    }
                 }
             }
         }
     }
+    
+    
+    
 }
