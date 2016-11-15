@@ -7,6 +7,7 @@
 //
 
 ///An Adapter allows classes with incompatible interfaces to work together. It wraps itself around an object and exposes a standard interface to interact with that object.
+/// Your HorizontalScroller is ready for use! Browse through the code you’ve just written; you’ll see there’s not one single mention of the Album or AlbumView classes. That’s excellent, because this means that the new scroller is truly independent and reusable.
 
 import UIKit
 
@@ -53,6 +54,7 @@ class HorizontalScroller: UIView {
         //1
         //Create’s a new UIScrollView instance and add it to the parent view.
         scroller = UIScrollView()
+        scroller.delegate = self
         addSubview(scroller)
     
         //2
@@ -135,6 +137,27 @@ class HorizontalScroller: UIView {
         }
     }
     
+    //The above code takes into account the current offset of the scroll view and the dimensions and the padding of the views in order to calculate the distance of the current view from the center. The last line is important: once the view is centered, you then inform the delegate that the selected view has changed.
+    func centerCurrentView() {
+        var xFinal = Int(scroller.contentOffset.x) + (VIEWS_OFFSET/2) + VIEW_PADDING
+        let viewIndex = xFinal / (VIEW_DIMENTSIONS + (2*VIEW_PADDING))
+        xFinal = viewIndex * (VIEW_DIMENTSIONS + (2*VIEW_PADDING))
+        scroller.setContentOffset(CGPoint(x: xFinal, y: 0), animated: true)
+        if let delegate = delegate {
+            delegate.horizontalScrollerClicledViewAtIndex(scroller: self, index: Int(viewIndex))
+        }  
+    }
+}
+
+//scrollViewDidEndDragging(_:willDecelerate:) informs the delegate when the user finishes dragging. The decelerate parameter is true if the scroll view hasn’t come to a complete stop yet. When the scroll action ends, the the system calls scrollViewDidEndDecelerating. In both cases you should call the new method to center the current view since the current view probably has changed after the user dragged the scroll view.
+extension HorizontalScroller:UIScrollViewDelegate{
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            centerCurrentView()
+        }
+    }
     
-    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        centerCurrentView()
+    }
 }
