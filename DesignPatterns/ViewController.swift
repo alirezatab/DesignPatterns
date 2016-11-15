@@ -86,3 +86,14 @@ extension ViewController : UITableViewDataSource {
 extension ViewController : UITableViewDelegate {
     
 }
+
+extension ViewController : HorizontalScrollerDelegate{
+    func horizontalScrollerClicledViewAtIndex(scroller: HorizontalScroller, index: Int) {
+        //1 
+        let previousAlbumView = scroller.viewAtIndex(index: currentAlbumIndex) as! AlbumView
+        previousAlbumView.highlightAlbum(didHighlightView: false)
+        //2
+        
+        
+    }
+}
