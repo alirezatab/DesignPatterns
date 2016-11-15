@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var dataTable: UITableView!
     @IBOutlet weak var toolbar: UIToolbar!
-    
+    @IBOutlet weak var scroller: HorizontalScroller!
     //private is only seen in ViewController and not any of the extension within the file
     //fileprivate is private for other files but even etensions of this file can see it
     private var allAlbums = [Album]()
