@@ -93,7 +93,10 @@ class HorizontalScroller: UIView {
         }
     }
     
-    
+    //didMoveToSuperview is called on a view when it’s added to another view as a subview. This is the right time to reload the contents of the scroller.
+    override func didMoveToSuperview() {
+        reload()
+    }
     
     func reload() {
         // 1- Check if there is a delegate, if not there is nothing to load
@@ -110,6 +113,7 @@ class HorizontalScroller: UIView {
             var xValue = VIEWS_OFFSET
             for index in 0..<delegate.numberOfViewsForHorizontalScroller(scroller: self) {
                 //5- add a view at the right position
+                //The HorizontalScroller asks its delegate for the views one at a time and it lays them next to each another horizontally with the previously defined padding.
                 xValue += VIEW_PADDING
                 let view = delegate.horizontalScrollerViewAtIndex(scroller: self, index: index)
                 view.frame = CGRect(x: CGFloat(xValue), y: CGFloat(VIEW_PADDING), width: CGFloat(VIEW_DIMENTSIONS), height: CGFloat(VIEW_DIMENTSIONS))
@@ -119,14 +123,18 @@ class HorizontalScroller: UIView {
                 viewArray.append(view)
             }
             // 7
+            // Once all the views are in place, set the content offset for the scroll view to allow the user to scroll through all the albums covers.
             scroller.contentSize = CGSize(width: CGFloat(xValue + VIEWS_OFFSET), height: frame.size.height)
             
             //8 - If an Initial view is defined, ceter the scroller on it
+            //The HorizontalScroller checks if its delegate implements initialViewIndex(). This check is necessary because that particular protocol method is optional. If the delegate doesn’t implement this method, 0 is used as the default value. Finally, this piece of code sets the scroll view to center the initial view defined by the delegate.
             if let initialView = delegate.initialViewIndex?(scroller: self) {
                 scroller.setContentOffset(CGPoint(x: CGFloat(initialView)*CGFloat((VIEW_DIMENTSIONS + (2 * VIEW_PADDING))), y: 0), animated: true)
             }
             
         }
     }
+    
+    
     
 }
