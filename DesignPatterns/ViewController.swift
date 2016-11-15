@@ -87,13 +87,17 @@ extension ViewController : UITableViewDelegate {
     
 }
 
-extension ViewController : HorizontalScrollerDelegate{
-    func horizontalScrollerClicledViewAtIndex(scroller: HorizontalScroller, index: Int) {
-        //1 
-        let previousAlbumView = scroller.viewAtIndex(index: currentAlbumIndex) as! AlbumView
+extension ViewController: HorizontalScrollerDelegate {
+    func horizontalScrollerClickedViewAtIndex(scroller: HorizontalScroller, index: Int) {
+        //1
+        let previousAlbumView = scroller.viewAtIndex(currentAlbumIndex) as! AlbumView
         previousAlbumView.highlightAlbum(didHighlightView: false)
         //2
-        
-        
+        currentAlbumIndex = index
+        //3
+        let albumView = scroller.viewAtIndex(index: index) as! AlbumView
+        albumView.highlightAlbum(didHighlightView: true)
+        //4
+        showDataForAlbum(albumIndex: index)
     }
 }
