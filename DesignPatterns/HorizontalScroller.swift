@@ -24,7 +24,7 @@ import UIKit
 class HorizontalScroller: UIView {
 
     //This is necessary in order to prevent a retain cycle. If a class keeps a strong reference to its delegate and the delegate keeps a strong reference back to the conforming class, your app will leak memory since neither class will release the memory allocated to the other. All properties in swift are strong by default!
-    weak var delegate : HorizontalScrollerDelegate
+    weak var delegate : HorizontalScrollerDelegate?
     
     //1
     //Define constants to make it easy to modify the layout at design time. The view’s dimensions inside the scroller will be 100 x 100 with a 10 point margin from its enclosing rectangle.
@@ -81,20 +81,52 @@ class HorizontalScroller: UIView {
         // The gesture passed in as a parameter lets you extract the location with locationInView()
         let location = gesture.location(in: gesture.view)
         if let delegate = delegate {
-            for index in 0..<delegate.numberOfViewsForHorizontalScroller(self) {
-                let view = scroller.subviews[index] as! UIView
+            for index in 0..<delegate.numberOfViewsForHorizontalScroller(scroller: self) {
+                let view = scroller.subviews[index] 
                 if view.frame.contains(location) {
-                    // For each view in the scroll view, perform a hit test using CGRectContainsPoint to find the view that was tapped. When the view is found, call the delegate method horizontalScrollerClickedViewAtIndex. Before you break out of the for loop, center the tapped view in the scroll view
-                    if CGRectContainsPoint(view.frame, location) {
-                        delegate.horizontalScrollerClickedViewAtIndex(self, index: index)
-                        scroller.setContentOffset(CGPoint(x: view.frame.origin.x - self.frame.size.width/2 + view.frame.size.width/2, y: 0), animated:true)
-                        break
-                    }
+                    // For each view in the scroll view, perform a hit test using CGRectContainsPoint to find the view that was tapped. When the view is found, call the delegate method horizontalScrollerClickedViewAtIndex. Before you break out of the for loop, center the tapped view in the scroll view---> replaced by above code
+                    delegate.horizontalScrollerClicledViewAtIndex(scroller: self, index: index)
+                    scroller.setContentOffset(CGPoint(x: view.frame.origin.x - self.frame.size.width/2 + view.frame.size.width/2, y: 0), animated:true)
+                    break
                 }
             }
         }
     }
     
     
+    
+    func reload() {
+        // 1- Check if there is a delegate, if not there is nothing to load
+        if let delegate = delegate {
+            //2- Will keep adding new album views on relaod, need to retest
+            viewArray = []
+            let views: NSArray = scroller.subviews as NSArray
+            //3- remove all subViews
+            for view in views {
+                (view as AnyObject).removeFromSuperview()
+            }
+            
+            //4- xValue is the starting point of the views inside the scroller
+            var xValue = VIEWS_OFFSET
+            for index in 0..<delegate.numberOfViewsForHorizontalScroller(scroller: self) {
+                //5- add a view at the right position
+                xValue += VIEW_PADDING
+                let view = delegate.horizontalScrollerViewAtIndex(scroller: self, index: index)
+                view.frame = CGRect(x: CGFloat(xValue), y: CGFloat(VIEW_PADDING), width: CGFloat(VIEW_DIMENTSIONS), height: CGFloat(VIEW_DIMENTSIONS))
+                scroller.addSubview(view)
+                xValue += VIEW_DIMENTSIONS + VIEW_PADDING
+                //6- Store the view so we can reference it later
+                viewArray.append(view)
+            }
+            // 7
+            scroller.contentSize = CGSize(width: CGFloat(xValue + VIEWS_OFFSET), height: frame.size.height)
+            
+            //8 - If an Initial view is defined, ceter the scroller on it
+            if let initialView = delegate.initialViewIndex?(scroller: self) {
+                scroller.setContentOffset(CGPoint(x: CGFloat(initialView)*CGFloat((VIEW_DIMENTSIONS + (2 * VIEW_PADDING))), y: 0), animated: true)
+            }
+            
+        }
+    }
     
 }
