@@ -21,6 +21,12 @@ class AlbumView: UIView {
         commonInit()
     }
     
+    init(frame: CGRect, albumCover: String) {
+        super.init(frame: frame)
+        commonInit()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "BLDownloadImageNotification"), object: self, userInfo: ["imageView":coverImage, "coverUrl" : albumCover])
+    }
+    
     ///commonInit is a helper method used in both init: that you’ll use in the rest of the app, you set some nice defaults for the album view. You set the background to black, create the image view with a small margin of 5 pixels and create and add the activity indicator.
     func commonInit() {
         backgroundColor = UIColor.black

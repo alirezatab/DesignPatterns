@@ -15,9 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var scroller: HorizontalScroller!
     //private is only seen in ViewController and not any of the extension within the file
     //fileprivate is private for other files but even etensions of this file can see it
-    private var allAlbums = [Album]()
+    fileprivate var allAlbums = [Album]()
     fileprivate var currentAlbumData : (titles:[String], values:[String])?
-    private var currentAlbumIndex = 0
+    fileprivate var currentAlbumIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,9 @@ class ViewController: UIViewController {
         view.addSubview(dataTable!)
         
         self.showDataForAlbum(albumIndex: currentAlbumIndex)
+        
+        scroller.delegate = self
+        reloadScroller()
     }
     
     func showDataForAlbum(albumIndex: Int) {
@@ -52,6 +55,17 @@ class ViewController: UIViewController {
         }
         // we have the data we need, let's refresh our tableview
         dataTable!.reloadData()
+    }
+    
+    func reloadScroller() {
+        allAlbums = LibraryAPI.sharedInstance.getAlbums()
+        if currentAlbumIndex < 0 {
+            currentAlbumIndex = 0
+        } else if currentAlbumIndex >= allAlbums.count {
+            currentAlbumIndex = allAlbums.count - 1
+        }
+        scroller.reload()
+        showDataForAlbum(albumIndex: currentAlbumIndex)
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,10 +101,27 @@ extension ViewController : UITableViewDelegate {
     
 }
 
+
+
 extension ViewController: HorizontalScrollerDelegate {
-    func horizontalScrollerClickedViewAtIndex(scroller: HorizontalScroller, index: Int) {
+    func numberOfViewsForHorizontalScroller(_ scroller: HorizontalScroller) -> (Int) {
+        return allAlbums.count
+    }
+    
+    func horizontalScrollerViewAtIndex(_ scroller: HorizontalScroller, index: Int) -> (UIView) {
+        let album = allAlbums[index]
+        let albumView = AlbumView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), albumCover: album.coverUrl)
+        if currentAlbumIndex == index {
+            albumView.highlightAlbum(didHighlightView: true)
+        } else {
+            albumView.highlightAlbum(didHighlightView: false)
+        }
+        return albumView
+    }
+    
+    func horizontalScrollerClickedViewAtIndex(_ scroller: HorizontalScroller, index: Int) {
         //1
-        let previousAlbumView = scroller.viewAtIndex(currentAlbumIndex) as! AlbumView
+        let previousAlbumView = scroller.viewAtIndex(index: currentAlbumIndex) as! AlbumView
         previousAlbumView.highlightAlbum(didHighlightView: false)
         //2
         currentAlbumIndex = index

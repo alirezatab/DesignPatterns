@@ -13,13 +13,14 @@ import UIKit
 
 @objc protocol HorizontalScrollerDelegate{
     // ask the delegate how many views he wants to present inside the horizontal scroller
-    func numberOfViewsForHorizontalScroller(scroller: HorizontalScroller) -> Int
+    func numberOfViewsForHorizontalScroller(_ scroller: HorizontalScroller) -> Int
     // ask the delegate to return the view that should appear at <index>
-    func horizontalScrollerViewAtIndex(scroller: HorizontalScroller, index: Int) -> UIView
+    func horizontalScrollerViewAtIndex(_ scroller: HorizontalScroller, index:Int) -> UIView
     // inform the delegate what the view at <index> has been clicked
-    func horizontalScrollerClicledViewAtIndex(scroller: HorizontalScroller, index: Int)
-    // ask the delegate for index of the initial view to display. this method is optional and defualts to 0 if it's not implemented by the delegate
-    @objc optional func initialViewIndex(scroller: HorizontalScroller) -> Int
+    func horizontalScrollerClickedViewAtIndex(_ scroller: HorizontalScroller, index:Int)
+    // ask the delegate for the index of the initial view to display. this method is optional
+    // and defaults to 0 if it's not implemented by the delegate
+    @objc optional func initialViewIndex(_ scroller: HorizontalScroller) -> Int
 }
 
 class HorizontalScroller: UIView {
@@ -35,7 +36,7 @@ class HorizontalScroller: UIView {
     
     //2
     //Create the scroll view containing the views.
-    private var scroller : UIScrollView!
+    fileprivate var scroller : UIScrollView!
     
     //3
     //Create an array that holds all the album covers.
@@ -83,11 +84,11 @@ class HorizontalScroller: UIView {
         // The gesture passed in as a parameter lets you extract the location with locationInView()
         let location = gesture.location(in: gesture.view)
         if let delegate = delegate {
-            for index in 0..<delegate.numberOfViewsForHorizontalScroller(scroller: self) {
+            for index in 0..<delegate.numberOfViewsForHorizontalScroller(self) {
                 let view = scroller.subviews[index] 
                 if view.frame.contains(location) {
                     // For each view in the scroll view, perform a hit test using CGRectContainsPoint to find the view that was tapped. When the view is found, call the delegate method horizontalScrollerClickedViewAtIndex. Before you break out of the for loop, center the tapped view in the scroll view---> replaced by above code
-                    delegate.horizontalScrollerClicledViewAtIndex(scroller: self, index: index)
+                    delegate.horizontalScrollerClickedViewAtIndex(self, index: index)
                     scroller.setContentOffset(CGPoint(x: view.frame.origin.x - self.frame.size.width/2 + view.frame.size.width/2, y: 0), animated:true)
                     break
                 }
@@ -113,11 +114,11 @@ class HorizontalScroller: UIView {
             
             //4- xValue is the starting point of the views inside the scroller
             var xValue = VIEWS_OFFSET
-            for index in 0..<delegate.numberOfViewsForHorizontalScroller(scroller: self) {
+            for index in 0..<delegate.numberOfViewsForHorizontalScroller(self) {
                 //5- add a view at the right position
                 //The HorizontalScroller asks its delegate for the views one at a time and it lays them next to each another horizontally with the previously defined padding.
                 xValue += VIEW_PADDING
-                let view = delegate.horizontalScrollerViewAtIndex(scroller: self, index: index)
+                let view = delegate.horizontalScrollerViewAtIndex(self, index: index)
                 view.frame = CGRect(x: CGFloat(xValue), y: CGFloat(VIEW_PADDING), width: CGFloat(VIEW_DIMENTSIONS), height: CGFloat(VIEW_DIMENTSIONS))
                 scroller.addSubview(view)
                 xValue += VIEW_DIMENTSIONS + VIEW_PADDING
@@ -130,7 +131,7 @@ class HorizontalScroller: UIView {
             
             //8 - If an Initial view is defined, ceter the scroller on it
             //The HorizontalScroller checks if its delegate implements initialViewIndex(). This check is necessary because that particular protocol method is optional. If the delegate doesn’t implement this method, 0 is used as the default value. Finally, this piece of code sets the scroll view to center the initial view defined by the delegate.
-            if let initialView = delegate.initialViewIndex?(scroller: self) {
+            if let initialView = delegate.initialViewIndex?(self) {
                 scroller.setContentOffset(CGPoint(x: CGFloat(initialView)*CGFloat((VIEW_DIMENTSIONS + (2 * VIEW_PADDING))), y: 0), animated: true)
             }
             
@@ -144,10 +145,12 @@ class HorizontalScroller: UIView {
         xFinal = viewIndex * (VIEW_DIMENTSIONS + (2*VIEW_PADDING))
         scroller.setContentOffset(CGPoint(x: xFinal, y: 0), animated: true)
         if let delegate = delegate {
-            delegate.horizontalScrollerClicledViewAtIndex(scroller: self, index: Int(viewIndex))
+            delegate.horizontalScrollerClickedViewAtIndex(self, index: Int(viewIndex))
         }  
     }
 }
+
+
 
 //scrollViewDidEndDragging(_:willDecelerate:) informs the delegate when the user finishes dragging. The decelerate parameter is true if the scroll view hasn’t come to a complete stop yet. When the scroll action ends, the the system calls scrollViewDidEndDecelerating. In both cases you should call the new method to center the current view since the current view probably has changed after the user dragged the scroll view.
 extension HorizontalScroller:UIScrollViewDelegate{
