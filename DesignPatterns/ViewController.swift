@@ -37,13 +37,13 @@ class ViewController: UIViewController {
         dataTable.backgroundView = nil
         view.addSubview(dataTable!)
         
-        self.showDataForAlbum(albumIndex: currentAlbumIndex)
+        self.showDataForAlbum(currentAlbumIndex)
         
         scroller.delegate = self
         reloadScroller()
     }
     
-    func showDataForAlbum(albumIndex: Int) {
+    func showDataForAlbum(_ albumIndex: Int) {
         // defensive code: make sure the requested index is lower than the amount of albums
         if (albumIndex < allAlbums.count && albumIndex > -1) {
             //fetch albums
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
             currentAlbumIndex = allAlbums.count - 1
         }
         scroller.reload()
-        showDataForAlbum(albumIndex: currentAlbumIndex)
+        showDataForAlbum(currentAlbumIndex)
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,14 +121,14 @@ extension ViewController: HorizontalScrollerDelegate {
     
     func horizontalScrollerClickedViewAtIndex(_ scroller: HorizontalScroller, index: Int) {
         //1
-        let previousAlbumView = scroller.viewAtIndex(index: currentAlbumIndex) as! AlbumView
+        let previousAlbumView = scroller.viewAtIndex(currentAlbumIndex) as! AlbumView
         previousAlbumView.highlightAlbum(didHighlightView: false)
         //2
         currentAlbumIndex = index
         //3
-        let albumView = scroller.viewAtIndex(index: index) as! AlbumView
+        let albumView = scroller.viewAtIndex(index) as! AlbumView
         albumView.highlightAlbum(didHighlightView: true)
         //4
-        showDataForAlbum(albumIndex: index)
+        showDataForAlbum(index)
     }
 }

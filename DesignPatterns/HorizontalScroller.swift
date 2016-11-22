@@ -61,7 +61,7 @@ class HorizontalScroller: UIView {
         //2
         //Turn off autoresizing masks. This is so you can apply your own constraints
         ///below code has no setTranslateAutoresizingMaskIntoConstraints
-        ///scroller.setTranslateAutoresizingMaskIntoConstraints(false)
+        //scroller.setTranslateAutoresizingMaskIntoConstraints(false)
         
         //3
         //Apply constraints to the scrollview. You want the scroll view to completely fill the HorizontalScroller
@@ -76,7 +76,7 @@ class HorizontalScroller: UIView {
         scroller.addGestureRecognizer(tapRecognizer)
     }
     
-    func viewAtIndex(index :Int) -> UIView {
+    func viewAtIndex(_ index :Int) -> UIView {
         return viewArray[index]
     }
     
