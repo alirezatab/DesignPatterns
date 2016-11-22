@@ -24,7 +24,9 @@ class AlbumView: UIView {
     init(frame: CGRect, albumCover: String) {
         super.init(frame: frame)
         commonInit()
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "BLDownloadImageNotification"), object: self, userInfo: ["imageView":coverImage, "coverUrl" : albumCover])
+       
+        //This line sends a notification through the NSNotificationCenter singleton. The notification info contains the UIImageView to populate and the URL of the cover image to be downloaded. That’s all the information you need to perform the cover download task.
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: self, userInfo:["imageView": coverImage, "coverUrl": albumCover])
     }
     
     ///commonInit is a helper method used in both init: that you’ll use in the rest of the app, you set some nice defaults for the album view. You set the background to black, create the image view with a small margin of 5 pixels and create and add the activity indicator.

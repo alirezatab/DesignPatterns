@@ -35,6 +35,14 @@ class LibraryAPI: NSObject {
         isOnline = false
         
         super.init()
+        
+        //This is the other side of the equation: the observer. Every time an AlbumView class posts a BLDownloadImageNotification notification, since LibraryAPI has registered as an observer for the same notification, the system notifies LibraryAPI. Then LibraryAPI calls downloadImage() in response.
+        NotificationCenter.default.addObserver(self, selector:Selector(("downloadImage:")), name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: nil)
+    }
+    
+    //you must remember to unsubscribe from this notification when your class is deallocated. If you do not properly unsubscribe from a notification your class registered for, a notification might be sent to a deallocated instance. This can result in application crashes.
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func getAlbums() -> [Album] {
