@@ -62,7 +62,7 @@ class HorizontalScroller: UIView {
         //Turn off autoresizing masks. This is so you can apply your own constraints
         ///below code has no setTranslateAutoresizingMaskIntoConstraints
         //scroller.setTranslateAutoresizingMaskIntoConstraints(false)
-        
+        scroller.translatesAutoresizingMaskIntoConstraints = false
         //3
         //Apply constraints to the scrollview. You want the scroll view to completely fill the HorizontalScroller
         self.addConstraint(NSLayoutConstraint(item: scroller, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0))
