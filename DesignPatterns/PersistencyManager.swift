@@ -65,4 +65,24 @@ class PersistencyManager: NSObject {
     func deleteAlbumAtIndex(index: Int) {
         albums.remove(at: index)
     }
+    // The downloaded images will be saved in the Documents directory, and getImage() will return nil if a matching file is not found in the Documents directory.
+    func saveImage(_ image: UIImage, fileName: String) {
+        let filename = NSHomeDirectory() + "/Documents/\(fileName)"
+        let data = UIImagePNGRepresentation(image)
+        try? data?.write(to: URL(fileURLWithPath: filename), options: [.atomic])
+    }
+    
+    func getImage(_ filename: String) -> UIImage? {
+        var error: NSError?
+        let path = NSHomeDirectory() + "/Documents/\(filename)"
+        do {
+            let data = try NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
+        } catch {
+            if let unwrappedError = error {
+                return nil
+            } else {
+                return UIImage(data: data!)
+            }
+        }
+    }
 }

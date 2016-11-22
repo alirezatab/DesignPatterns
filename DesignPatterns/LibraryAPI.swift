@@ -37,6 +37,8 @@ class LibraryAPI: NSObject {
         super.init()
         
         //This is the other side of the equation: the observer. Every time an AlbumView class posts a BLDownloadImageNotification notification, since LibraryAPI has registered as an observer for the same notification, the system notifies LibraryAPI. Then LibraryAPI calls downloadImage() in response.
+        ///NotificationCenter.default.addObserver(self, selector:#selector(LibraryAPI.downloadImage(_:)), name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: nil)
+        
         NotificationCenter.default.addObserver(self, selector:Selector(("downloadImage:")), name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: nil)
     }
     
