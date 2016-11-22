@@ -75,14 +75,13 @@ class PersistencyManager: NSObject {
     func getImage(_ filename: String) -> UIImage? {
         var error: NSError?
         let path = NSHomeDirectory() + "/Documents/\(filename)"
-        do {
-            let data = try NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
-        } catch {
-            if let unwrappedError = error {
-                return nil
-            } else {
-                return UIImage(data: data!)
-            }
+
+        let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
+
+        if error != nil{
+            return nil
+        } else {
+            return UIImage(data: data as! Data)
         }
     }
 }
