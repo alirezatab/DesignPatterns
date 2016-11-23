@@ -66,21 +66,23 @@ class LibraryAPI: NSObject {
         }
     }
     
+    
+    //Again, you’re using the Facade pattern to hide the complexity of downloading an image from the other classes. The notification sender doesn’t care if the image came from the web or from the file system.
     func downloadImage(notification: NSNotification) {
-        //1
+        //1 - downloadImage is executed via notifications and so the method receives the notification object as a parameter. The UIImageView and image URL are retrieved from the notification.
         let userInfo = notification.userInfo as! [String : AnyObject]
         let imageView = userInfo["imageView"] as! UIImageView?
         let coverUrlString = userInfo["coverUrl"] as! String
         let coverUrl = NSURL(string: coverUrlString)
-        //2
+        //2 - Retrieve the image from the PersistencyManager if it’s been downloaded previously.
         if let imageViewUnwrapped = imageView{
             imageViewUnwrapped.image = persistencyManager.getImage((coverUrl?.lastPathComponent)!)
             if imageViewUnwrapped.image == nil{
-                //3
+                //3 - If the image hasn’t already been downloaded, then retrieve it using HTTPClient.
                 ///dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
                     let downloadImage = self.httpClient.downloadImage(coverUrlString as String)
-                    //4
+                    //4 - When the download is complete, display the image in the image view and use the PersistencyManager to save it locally.
                     ///dispatch_sync(dispatch_get_main_queue()
                     DispatchQueue.main.async {
                         imageViewUnwrapped.image = downloadImage
@@ -89,7 +91,6 @@ class LibraryAPI: NSObject {
                 }
             }
         }
-        
     }
 }
 
