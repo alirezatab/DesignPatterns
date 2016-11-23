@@ -37,9 +37,8 @@ class LibraryAPI: NSObject {
         super.init()
         
         //This is the other side of the equation: the observer. Every time an AlbumView class posts a BLDownloadImageNotification notification, since LibraryAPI has registered as an observer for the same notification, the system notifies LibraryAPI. Then LibraryAPI calls downloadImage() in response.
-        ///NotificationCenter.default.addObserver(self, selector:#selector(LibraryAPI.downloadImage(_:)), name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector:Selector(("downloadImage:")), name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(LibraryAPI.downloadImage(_:)), name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: nil)
     }
     
     //you must remember to unsubscribe from this notification when your class is deallocated. If you do not properly unsubscribe from a notification your class registered for, a notification might be sent to a deallocated instance. This can result in application crashes.
@@ -68,7 +67,7 @@ class LibraryAPI: NSObject {
     
     
     //Again, you’re using the Facade pattern to hide the complexity of downloading an image from the other classes. The notification sender doesn’t care if the image came from the web or from the file system.
-    func downloadImage(notification: NSNotification) {
+    func downloadImage(_ notification: Notification) {
         //1 - downloadImage is executed via notifications and so the method receives the notification object as a parameter. The UIImageView and image URL are retrieved from the notification.
         let userInfo = notification.userInfo as! [String : AnyObject]
         let imageView = userInfo["imageView"] as! UIImageView?
