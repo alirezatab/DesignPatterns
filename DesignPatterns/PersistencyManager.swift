@@ -78,7 +78,7 @@ class PersistencyManager: NSObject {
 
         let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
 
-        if error != nil{
+        if let unwrappedError = error {
             return nil
         } else {
             return UIImage(data: data as! Data)
