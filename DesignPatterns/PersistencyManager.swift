@@ -79,11 +79,9 @@ class PersistencyManager: NSObject {
         print(path)
         
         //issue here
-        do {
-           let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
-            return UIImage(data: data as! Data)
-        } catch {
-           return nil
+        if let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead){
+            return UIImage(data: data as Data)
         }
+        return nil
     }
 }

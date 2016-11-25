@@ -82,6 +82,7 @@ class LibraryAPI: NSObject {
                 ///dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
                     let downloadImage = self.httpClient.downloadImage(coverUrlString as String)
+                    print(downloadImage) 
                     //4 - When the download is complete, display the image in the image view and use the PersistencyManager to save it locally.
                     ///dispatch_sync(dispatch_get_main_queue()
                     DispatchQueue.main.async {
