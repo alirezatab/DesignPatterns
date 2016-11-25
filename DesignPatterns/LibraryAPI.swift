@@ -73,6 +73,7 @@ class LibraryAPI: NSObject {
         let imageView = userInfo["imageView"] as! UIImageView?
         let coverUrlString = userInfo["coverUrl"] as! String
         let coverUrl = NSURL(string: coverUrlString)
+        print(coverUrl!)
         //2 - Retrieve the image from the PersistencyManager if it’s been downloaded previously.
         if let imageViewUnwrapped = imageView{
             imageViewUnwrapped.image = persistencyManager.getImage((coverUrl?.lastPathComponent)!)
