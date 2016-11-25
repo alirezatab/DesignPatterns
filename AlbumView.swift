@@ -27,6 +27,8 @@ class AlbumView: UIView {
        
         //This line sends a notification through the NSNotificationCenter singleton. The notification info contains the UIImageView to populate and the URL of the cover image to be downloaded. That’s all the information you need to perform the cover download task.
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "BLDownloadImageNotification"), object: self, userInfo:["imageView": coverImage, "coverUrl": albumCover])
+   
+        // instead of nil for options, use []
     }
     
     ///commonInit is a helper method used in both init: that you’ll use in the rest of the app, you set some nice defaults for the album view. You set the background to black, create the image view with a small margin of 5 pixels and create and add the activity indicator.
@@ -34,6 +36,10 @@ class AlbumView: UIView {
         backgroundColor = UIColor.black
         coverImage = UIImageView(frame: CGRect(x: 5, y: 5, width: frame.size.width - 10, height: frame.size.height - 10))
         addSubview(coverImage)
+        
+        coverImage.addObserver(self, forKeyPath: "image", options: [], context: nil)
+
+        
         indicator = UIActivityIndicatorView()
         indicator.center = center
         indicator.activityIndicatorViewStyle = .whiteLarge
@@ -47,6 +53,16 @@ class AlbumView: UIView {
             backgroundColor = UIColor.white
         } else {
             backgroundColor = UIColor.black
+        }
+    }
+    
+    deinit {
+        coverImage.removeObserver(self, forKeyPath: "image")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "image"{
+            indicator.stopAnimating()
         }
     }
     
