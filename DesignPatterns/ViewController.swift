@@ -76,6 +76,12 @@ class ViewController: UIViewController {
         showDataForAlbum(currentAlbumIndex)
     }
     
+    // This is what the optional method initialViewIndexForHorizontalScroller was meant for! Since that method’s not implemented in the delegate, ViewController in this case, the initial view is always set to the first view.
+    func initialViewIndex(_ scroller: HorizontalScroller) -> Int {
+        // Now the HorizontalScroller first view is set to whatever album is indicated by currentAlbumIndex.
+        return currentAlbumIndex
+    }
+    
     //MARK: Memento Pattern
     func saveCurrentState() {
         // When the user leaves the app and then comes back again, he wants it to be in the exact same state
