@@ -68,6 +68,7 @@ class PersistencyManager: NSObject {
     // The downloaded images will be saved in the Documents directory, and getImage() will return nil if a matching file is not found in the Documents directory.
     func saveImage(_ image: UIImage, fileName: String) {
         let filename = NSHomeDirectory() + "/Documents/\(fileName)"
+        
         let data = UIImagePNGRepresentation(image)
         try? data?.write(to: URL(fileURLWithPath: filename), options: [.atomic])
     }
@@ -75,7 +76,9 @@ class PersistencyManager: NSObject {
     func getImage(_ filename: String) -> UIImage? {
         var error: NSError?
         let path = NSHomeDirectory() + "/Documents/\(filename)"
-
+        print(path)
+        
+        //issue here
         let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
 
         if let unwrappedError = error {
