@@ -84,4 +84,7 @@ class PersistencyManager: NSObject {
         }
         return nil
     }
+    
+    // for archiving purposes
+    
 }
