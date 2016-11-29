@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         showDataForAlbum(currentAlbumIndex)
     }
 
-    func addAlbumAtIndes(album: Album, index: Int) {
+    func addAlbumAtIndex(album: Album, index: Int) {
         LibraryAPI.sharedInstance.addAlbum(album: album, index: index)
         currentAlbumIndex = index
         reloadScroller()
@@ -136,6 +136,23 @@ class ViewController: UIViewController {
             let trashButton : UIBarButtonItem = barButtonItems![2]
             trashButton.isEnabled = false
         }
+    }
+    
+    func undoAction() {
+        let barButtonItems = toolbar.items as [UIBarButtonItem]!
+        // 1 - The method “pops” the object out of the stack, giving you a tuple containing the deleted Album and its index. You then proceed to add the album back.
+        if undoStack.count > 0 {
+            let (deleteAlbum, index) = undoStack.remove(at: 0)
+            addAlbumAtIndex(album: deleteAlbum, index: index)
+        }
+        // 2 - Since you also deleted the last object in the stack when you “popped” it, you now need to check if the stack is empty. If it is, that means that there are no more actions to undo. So you disable the Undo button.
+        if undoStack.count == 0 {
+            let undoButton : UIBarButtonItem = barButtonItems![0]
+            undoButton.isEnabled = false
+        }
+        // 3 - You also know that since you undid an action, there should be at least one album cover. Hence you enable the trash button.
+        let trashButton : UIBarButtonItem = barButtonItems![2]
+        trashButton.isEnabled = true
     }
     
     override func didReceiveMemoryWarning() {
