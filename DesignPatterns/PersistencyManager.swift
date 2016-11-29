@@ -74,7 +74,7 @@ class PersistencyManager: NSObject {
     }
     
     func getImage(_ filename: String) -> UIImage? {
-        var error: NSError?
+        //var error: NSError?
         let path = NSHomeDirectory() + "/Documents/\(filename)"
         print(path)
         
@@ -85,6 +85,15 @@ class PersistencyManager: NSObject {
         return nil
     }
     
-    // for archiving purposes
-    
+    // for archiving purposes. This will be the method that’s called to save the albums
+    //When you archive an object which contains other objects, the archiver automatically tries to recursively archive the child objects and any child objects of the children and so on. In this instance, the archival starts with albums, which is an array of Album instances. Since Array and Album both support the NSCopying interface, everything in the array is automatically archived.
+    func saveAlbums() {
+        let filename = NSHomeDirectory() + "/Documents/albums.bin"
+        let data = NSKeyedArchiver.archivedData(withRootObject: albums)
+        do {
+            try data.write(to: URL(fileURLWithPath: filename), options: .atomic)
+        } catch {
+            print(error)
+        }
+    }
 }
