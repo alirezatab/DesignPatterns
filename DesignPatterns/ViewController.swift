@@ -13,11 +13,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var dataTable: UITableView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var scroller: HorizontalScroller!
-    //private is only seen in ViewController and not any of the extension within the file
-    //fileprivate is private for other files but even etensions of this file can see it
+    // private is only seen in ViewController and not any of the extension within the file
+    // fileprivate is private for other files but even etensions of this file can see it
     fileprivate var allAlbums = [Album]()
     fileprivate var currentAlbumData : (titles:[String], values:[String])?
     fileprivate var currentAlbumIndex = 0
+    
+    // We will use this array as a stack to push and pop operation for the undo option
+    var undoStack: [(Album, Int)] = [] // The undoStack will hold a tuple of two arguments
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +44,17 @@ class ViewController: UIViewController {
         
         scroller.delegate = self
         reloadScroller()
-        loadPreviousState()
+        //loadPreviousState()
+        
+        
+        // The above code creates a toolbar with two buttons and a flexible space between them. The undo button is disabled here because the undo stack starts off empty. Note that the toolbar is already in the storyboard, so all you need to do is set the toolbar items.
+        let undoButton = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: Selector(("undoAction")))
+        undoButton.isEnabled = false
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: Selector(("deleteAlbum")))
+        let toolbarButtonItems = [undoButton, space, trashButton]
+        toolbar.setItems(toolbarButtonItems, animated: true)
+        
         
         // iOS sends a UIApplicationDidEnterBackgroundNotification notification when the app enters the background. You can use this notification to call saveCurrentState
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.saveCurrentState), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
