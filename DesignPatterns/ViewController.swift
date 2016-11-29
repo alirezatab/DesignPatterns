@@ -45,6 +45,9 @@ class ViewController: UIViewController {
         
         // iOS sends a UIApplicationDidEnterBackgroundNotification notification when the app enters the background. You can use this notification to call saveCurrentState
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.saveCurrentState), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        
+        // uses LibraryAPI to trigger the saving of album data whenever the ViewController saves its state.
+        LibraryAPI.sharedInstance.saveAlbums()
     }
     
     deinit {

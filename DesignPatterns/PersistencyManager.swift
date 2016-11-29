@@ -14,6 +14,22 @@ class PersistencyManager: NSObject {
     private var albums = [Album]()
     
     override init(){
+        super.init()
+        
+        //NSKeyedUnarchiver loads the album data from the file, if it exists. If it doesn’t exist, it creates the album data and immediately saves it for the next launch of the app
+        let path = NSHomeDirectory() + "/Documents/albums.bin"
+        
+        if let data = try? Data(contentsOf: URL(fileURLWithPath: path)){
+            let unarchivedAlbums = NSKeyedUnarchiver.unarchiveObject(with: data) as! Album?
+            if let unwrappedAlbum = unarchivedAlbums {
+                albums = [unwrappedAlbum]
+            }
+        } else {
+           createPlaceholderAlbum()
+        }
+    }
+    
+    func createPlaceholderAlbum() {
         //Dummy list of albums
         let album1 = Album(title: "Best of Bowie",
                            artist: "David Bowie",
@@ -78,7 +94,6 @@ class PersistencyManager: NSObject {
         let path = NSHomeDirectory() + "/Documents/\(filename)"
         print(path)
         
-        //issue here
         if let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead){
             return UIImage(data: data as Data)
         }

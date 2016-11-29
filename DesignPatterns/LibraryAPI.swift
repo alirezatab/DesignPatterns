@@ -93,6 +93,13 @@ class LibraryAPI: NSObject {
             }
         }
     }
+    
+    // Since the main application accesses all services via LibraryAPI, this is how the application will let PersistencyManager know that it needs to save album data.
+    // This code simply passes on a call to LibraryAPI to save the albums on to PersistencyMangaer
+    func saveAlbums() {
+        persistencyManager.saveAlbums()
+    }
+    
 }
 
 ///1
