@@ -20,9 +20,9 @@ class PersistencyManager: NSObject {
         let path = NSHomeDirectory() + "/Documents/albums.bin"
         
         if let data = try? Data(contentsOf: URL(fileURLWithPath: path)){
-            let unarchivedAlbums = NSKeyedUnarchiver.unarchiveObject(with: data) as! Album?
+            let unarchivedAlbums = NSKeyedUnarchiver.unarchiveObject(with: data)
             if let unwrappedAlbum = unarchivedAlbums {
-                albums = [unwrappedAlbum]
+                albums = unwrappedAlbum as! [Album]
             }
         } else {
            createPlaceholderAlbum()
