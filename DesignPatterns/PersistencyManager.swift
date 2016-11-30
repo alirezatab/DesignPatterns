@@ -94,10 +94,13 @@ class PersistencyManager: NSObject {
         let path = NSHomeDirectory() + "/Documents/\(filename)"
         print(path)
         
-        if let data = try? NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead){
-            return UIImage(data: data as Data)
+        do{
+            let data = try NSData(contentsOfFile: path, options: NSData.ReadingOptions.uncachedRead)
+                    return UIImage(data: data as Data)
+        } catch {
+            print(error)
+            return nil
         }
-        return nil
     }
     
     // for archiving purposes. This will be the method that’s called to save the albums

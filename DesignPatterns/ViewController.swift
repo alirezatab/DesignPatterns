@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         
         
         // The above code creates a toolbar with two buttons and a flexible space between them. The undo button is disabled here because the undo stack starts off empty. Note that the toolbar is already in the storyboard, so all you need to do is set the toolbar items.
-        let undoButton = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: Selector(("undoAction")))
+        let undoButton = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action:  #selector(ViewController.undoAction))
         undoButton.isEnabled = false
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(ViewController.deleteAlbum))
