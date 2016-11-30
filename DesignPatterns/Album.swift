@@ -22,7 +22,7 @@ class Album: NSObject, NSCoding {
         super.init()
         self.title = aDecoder.decodeObject(forKey: "title") as! String
         self.artist = aDecoder.decodeObject(forKey: "artist") as! String!
-        self.genre = aDecoder.decodeObject(forKey: "genere") as! String
+        self.genre = aDecoder.decodeObject(forKey: "genre") as! String
         self.coverUrl = aDecoder.decodeObject(forKey: "coverUrl") as! String
         self.year = aDecoder.decodeObject(forKey: "year") as! String
     }
@@ -32,7 +32,7 @@ class Album: NSObject, NSCoding {
         aCoder.encode(title, forKey: "title")
         aCoder.encode(artist, forKey: "artist")
         aCoder.encode(genre, forKey: "genre")
-        aCoder.encode(coverUrl, forKey: "coverIrl")
+        aCoder.encode(coverUrl, forKey: "coverUrl")
         aCoder.encode(year, forKey: "year")
     }
     
