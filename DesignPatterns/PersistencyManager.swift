@@ -22,7 +22,7 @@ class PersistencyManager: NSObject {
         if let data = try? Data(contentsOf: URL(fileURLWithPath: path)){
             let unarchivedAlbums = NSKeyedUnarchiver.unarchiveObject(with: data)
             if let unwrappedAlbum = unarchivedAlbums {
-                albums = unwrappedAlbum as! [Album]
+                albums = unwrappedAlbum as! [Any] as! [Album]
             }
         } else {
            createPlaceholderAlbum()
