@@ -18,7 +18,7 @@ class Album: NSObject, NSCoding {
     var year : String!
     
     //the init(coder:) initializer will be used to reconstruct or unarchive from a saved instance.
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init()
         self.title = aDecoder.decodeObject(forKey: "title") as! String
         self.artist = aDecoder.decodeObject(forKey: "artist") as! String!

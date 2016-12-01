@@ -62,6 +62,7 @@ class PersistencyManager: NSObject {
                            year: "2000")
         
         albums = [album1, album2, album3, album4, album5]
+        saveAlbums()
     }
     
     //MARK : get, add, and delete albums
