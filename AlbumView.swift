@@ -47,6 +47,10 @@ class AlbumView: UIView {
         addSubview(indicator)
     }
     
+    deinit {
+        coverImage.removeObserver(self, forKeyPath: "image")
+    }
+    
     //#didHighlightView: Bool
     func highlightAlbum(didHighlightView: Bool) {
         if didHighlightView == true {
@@ -56,9 +60,7 @@ class AlbumView: UIView {
         }
     }
     
-    deinit {
-        coverImage.removeObserver(self, forKeyPath: "image")
-    }
+    
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "image"{

@@ -104,6 +104,7 @@ class ViewController: UIViewController {
         // he left it. In order to do this we need to save the currently displayed album.
         // Since it's only one piece of information we can use NSUserDefaults.
         UserDefaults.standard.set(currentAlbumIndex, forKey: "currentAlbumIndex")
+        LibraryAPI.sharedInstance.saveAlbums()
     }
     
     func loadPreviousState() {
@@ -120,20 +121,20 @@ class ViewController: UIViewController {
     
     func deleteAlbum() {
         // 1 - Get the album to delete.
-        let deleteAlbum : Album = allAlbums[currentAlbumIndex]
+        var deleteAlbum : Album = allAlbums[currentAlbumIndex]
         // 2 - Create a variable called undoAction which stores a tuple of Album and the index of the album. You then add the tuple into the stack
-        let undoAction = (deleteAlbum, currentAlbumIndex)
+        var undoAction = (deleteAlbum, currentAlbumIndex)
         undoStack.insert(undoAction, at: 0)
         // 3 - Use LibraryAPI to delete the album from the data structure and reload the scroller.
         LibraryAPI.sharedInstance.deleteAlbum(index: currentAlbumIndex)
         reloadScroller()
         // 4 - ince there’s an action in the undo stack, you need to enable the undo button.
         let barButtonItems = toolbar.items as [UIBarButtonItem]!
-        let undoButton : UIBarButtonItem = barButtonItems![0]
+        var undoButton : UIBarButtonItem = barButtonItems![0]
         undoButton.isEnabled = true
         // 5 - astly check to see if there are any albums left; if there aren’t any you can disable the trash button
         if (allAlbums.count == 0) {
-            let trashButton : UIBarButtonItem = barButtonItems![2]
+            var trashButton : UIBarButtonItem = barButtonItems![2]
             trashButton.isEnabled = false
         }
     }
@@ -147,7 +148,7 @@ class ViewController: UIViewController {
         }
         // 2 - Since you also deleted the last object in the stack when you “popped” it, you now need to check if the stack is empty. If it is, that means that there are no more actions to undo. So you disable the Undo button.
         if undoStack.count == 0 {
-            let undoButton : UIBarButtonItem = barButtonItems![0]
+            var undoButton : UIBarButtonItem = barButtonItems![0]
             undoButton.isEnabled = false
         }
         // 3 - You also know that since you undid an action, there should be at least one album cover. Hence you enable the trash button.
