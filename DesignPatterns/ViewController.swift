@@ -121,20 +121,20 @@ class ViewController: UIViewController {
     
     func deleteAlbum() {
         // 1 - Get the album to delete.
-        var deleteAlbum : Album = allAlbums[currentAlbumIndex]
+        let deleteAlbum : Album = allAlbums[currentAlbumIndex]
         // 2 - Create a variable called undoAction which stores a tuple of Album and the index of the album. You then add the tuple into the stack
-        var undoAction = (deleteAlbum, currentAlbumIndex)
+        let undoAction = (deleteAlbum, currentAlbumIndex)
         undoStack.insert(undoAction, at: 0)
         // 3 - Use LibraryAPI to delete the album from the data structure and reload the scroller.
         LibraryAPI.sharedInstance.deleteAlbum(index: currentAlbumIndex)
         reloadScroller()
         // 4 - ince there’s an action in the undo stack, you need to enable the undo button.
         let barButtonItems = toolbar.items as [UIBarButtonItem]!
-        var undoButton : UIBarButtonItem = barButtonItems![0]
+        let undoButton : UIBarButtonItem = barButtonItems![0]
         undoButton.isEnabled = true
         // 5 - astly check to see if there are any albums left; if there aren’t any you can disable the trash button
         if (allAlbums.count == 0) {
-            var trashButton : UIBarButtonItem = barButtonItems![2]
+            let trashButton : UIBarButtonItem = barButtonItems![2]
             trashButton.isEnabled = false
         }
     }
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
         }
         // 2 - Since you also deleted the last object in the stack when you “popped” it, you now need to check if the stack is empty. If it is, that means that there are no more actions to undo. So you disable the Undo button.
         if undoStack.count == 0 {
-            var undoButton : UIBarButtonItem = barButtonItems![0]
+            let undoButton : UIBarButtonItem = barButtonItems![0]
             undoButton.isEnabled = false
         }
         // 3 - You also know that since you undid an action, there should be at least one album cover. Hence you enable the trash button.
